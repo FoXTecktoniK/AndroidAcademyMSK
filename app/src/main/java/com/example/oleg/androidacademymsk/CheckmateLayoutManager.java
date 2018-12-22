@@ -2,6 +2,7 @@ package com.example.oleg.androidacademymsk;
 
 import android.content.Context;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,19 +24,28 @@ public class CheckmateLayoutManager extends RecyclerView.LayoutManager {
 
         initLeftOffset();
 
-        final int left = getPaddingStart();
-        final int right = getWidth() - getPaddingEnd();
+        final int start = getPaddingStart();
+        final int end = getWidth() - getPaddingEnd();
+        final int width = (getWidth() - getPaddingEnd() - getPaddingStart()) >> 3;
+        final int height = (getHeight() - getPaddingEnd() - getPaddingTop()) >> 3;
+        final int squareSide = Math.min(width, height);
         int top = getPaddingTop() - mCurrentScroll;
 
-        for (int i = 0, count = state.getItemCount(); i < count; i++) {
-            final View view = recycler.getViewForPosition(i);
-            addView(view);
-            measureChildWithMargins(view, 0, 0);
-            final int bottom = top + view.getMeasuredHeight();
-            final int leftWithOffset = getLeftWithOffset(left, i);
-            final int rightWithOffset = getRightWithOffset(right, i);
-            layoutDecoratedWithMargins(view, leftWithOffset, top, rightWithOffset, bottom);
-            top = bottom;
+        for (int i = 0, count = state.getItemCount(); i < count; i+= 8) {
+            int left = start;
+            for (int j = 0; j < 8 && i + j < count; j++) {
+                final View view = recycler.getViewForPosition(i + j);
+                addView(view);
+                final ViewGroup.LayoutParams params = view.getLayoutParams();
+                params.width = squareSide;
+                params.height = squareSide;
+                view.setLayoutParams(params);
+                measureChildWithMargins(view, 0, 0);
+                int thisTop = top + height * (j % 2);
+                layoutDecoratedWithMargins(view, left, thisTop, left + squareSide, thisTop + squareSide);
+                left += width;
+            }
+            top += height << 1;
         }
         recycler.clear();
     }
@@ -56,24 +66,7 @@ public class CheckmateLayoutManager extends RecyclerView.LayoutManager {
     public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
         removeAndRecycleAllViews(recycler);
 
-        initLeftOffset();
-
-        final int start = getPaddingStart();
-        final int end = getWidth() - getPaddingEnd();
-        int top = getPaddingTop() - mCurrentScroll;
-
-        for (int i = 0, count = state.getItemCount(); i < count; i++) {
-            final View view = recycler.getViewForPosition(i);
-            if (view.getParent() == null) {
-                addView(view);
-                measureChildWithMargins(view, 0, 0);
-            }
-            final int bottom = top + getDecoratedMeasuredHeight(view);
-            final int leftWithOffset = getLeftWithOffset(start, i);
-            final int rightWithOffset = getRightWithOffset(end, i);
-            layoutDecoratedWithMargins(view, leftWithOffset, top, rightWithOffset, bottom);
-            top = bottom;
-        }
+        fillData(recycler, state);
 
     }
 
