@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    app:cardCornerRadius="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="4dp"
+        android:background="@color/cardview_dark_background">
+
+        <TextView
+            android:id="@+id/categoryTV"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_margin="8dp"
+            android:ellipsize="end"
+            android:textColor="@android:color/holo_green_dark"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toStartOf="@id/newsImgView"
+            app:layout_constraintBottom_toTopOf="@id/titleTV"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="IS THIS ONEME" />
+
+        <TextView
+            android:id="@+id/titleTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:ellipsize="end"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toStartOf="@id/newsImgView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/categoryTV"
+            tools:text="Header" />
+
+        <TextView
+            android:id="@+id/contentTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:maxLines="5"
+            android:textColor="@android:color/holo_blue_bright"
+            android:ellipsize="end"
+            app:layout_constraintBottom_toTopOf="@id/dateTimeTV"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/newsImgView"
+            app:layout_constraintTop_toBottomOf="@id/titleTV"
+            tools:text="Content" />
+
+        <TextView
+            android:id="@+id/dateTimeTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="date and time" />
+
+        <ImageView
+            android:id="@+id/newsImgView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars"
+            android:src="@drawable/ic_launcher_background"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>
