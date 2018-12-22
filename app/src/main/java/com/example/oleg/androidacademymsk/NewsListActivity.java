@@ -17,7 +17,8 @@ public class NewsListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_news_list);
 
         RecyclerView recyclerView = findViewById(R.id.newsRecycler);
-        recyclerView.setAdapter(new NewsRecyclerAdapter(this, DataUtils.generateNews()));
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setBackgroundColor(0xFF_FF_FF_FF);
+        recyclerView.setAdapter(new ExampleAdapter(this, 20));
+        recyclerView.setLayoutManager(new CheckmateLayoutManager(this));
     }
 }

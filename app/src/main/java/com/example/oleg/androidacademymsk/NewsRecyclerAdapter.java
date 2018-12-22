@@ -15,11 +15,9 @@ import java.util.List;
 import java.util.Locale;
 
 public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapter.ViewHolder> {
-    @NonNull
+
     private final LayoutInflater inflater;
-    @NonNull
     private final List<NewsItem> newsItemList;
-    @NonNull
     private final Context context;
 
     public NewsRecyclerAdapter(Context context, List<NewsItem> newsItemList) {
